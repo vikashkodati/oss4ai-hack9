@@ -20,7 +20,7 @@ def analyze_pdf(pdf_content):
     word_count = len(text.split())
     return f"Number of pages: {num_pages}\nTotal word count: {word_count}"
 
-st.title("PDF Downloader and Analyzer")
+st.title("Patent Infirngement Detector")
 
 url = st.text_input("Enter the URL of the PDF file:")
 if url:
