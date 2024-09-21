@@ -1,0 +1,18 @@
+I have a patent document and a set of research papers in a database. Your task is to analyze the content of the patent and identify any potential overlaps, similarities, or relevant discussions between the patent and the research papers.
+
+First, summarize the key claims, innovations, and technical features described in the patent.
+Then, analyze the research papers to find sections or concepts that relate to or overlap with the key claims of the patent. Focus on areas such as:
+Technology or methods described
+Applications of the technology
+Existing prior art
+Specific terminology or techniques
+Any experiments, results, or innovations that align with or challenge the patent’s claims
+After comparing the patent with the research papers, provide the following:
+
+A brief summary of the patent's key claims and technologies.
+A list of research papers from the database that have similar or overlapping content.
+A detailed comparison of the overlaps, including:
+Specific sections or claims in the patent that match the research papers.
+Key differences or novelties in the patent compared to the research.
+Any areas of potential conflict or further investigation based on the overlap.
+If applicable, suggest which papers might be most relevant for supporting or challenging the patent's claims.
