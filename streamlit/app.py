@@ -1,36 +1,31 @@
 import streamlit as st
-from datetime import date
+import requests
 import os
-from pydantic import BaseModel, Field, ValidationError
 
-# Streamlit app starts here
+def download_pdf(url, save_path):
+    response = requests.get(url)
+    if response.status_code == 200:
+        with open(save_path, 'wb') as file:
+            file.write(response.content)
+        return True
+    return False
+
 st.title("Patent Infringement Detector")
 
-# Sidebar inputs
-api_key = st.sidebar.text_input("Enter your OpenAI API Key", type="password")
-project_id = st.sidebar.text_input("Enter your Earth Engine Project ID", "genai-agent-hack-2024")
-#start_date = st.sidebar.date_input("Start Date", value=date(2021, 6, 1))
-#end_date = st.sidebar.date_input("End Date", value=date(2021, 6, 30))
-my_patent = st.sidebar.text_input("Patent Number", "")
-#image_name = st.sidebar.text_input("Image Name", "sentinel2_image")
-
-# Function to set the API key
-def set_api_key(key):
-    os.environ['OPENAI_API_KEY'] = key
-
-# Run the data fetch when button is clicked
-if st.sidebar.button("Fetch Sentinel-2 Image"):
-    if not api_key:
-        st.error("Please enter your OpenAI API Key.")
-    else:
-        set_api_key(api_key)
-        try:
-
-            # Display the result
-            st.write("Potential Infringemet sighted. Approx value $500million")
-        except ValidationError as e:
-            st.error(f"Validation Error: {e}")
-
-# Add a note about API key security
-st.sidebar.markdown("---")
-st.sidebar.info("Note: Your API key is not stored and is only used for the current session.")
+url = st.text_input("Enter the URL of your patent:")
+if url:
+    filename = url.split("/")[-1]
+    if not filename.endswith('.pdf'):
+        filename += '.pdf'
+    
+    save_path = os.path.join("downloads", filename)
+    
+    if st.button("Detect Infringement"):
+        with st.spinner("Analyzing..."):
+            if not os.path.exists("downloads"):
+                os.makedirs("downloads")
+            
+            if download_pdf(url, save_path):
+                st.success(f"PDF downloaded successfully and saved as {save_path}")
+            else:
+                st.error("Failed to download the PDF. Please check the URL and try again.")
