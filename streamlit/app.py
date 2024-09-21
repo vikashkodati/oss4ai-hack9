@@ -24,7 +24,7 @@ st.title("Patent Infirngement Detector")
 
 url = st.text_input("Enter the URL of the PDF file:")
 if url:
-    if st.button("Download and Analyze PDF"):
+    if st.button("Download and Analyze PDF for infrigement"):
         with st.spinner("Fetching and analyzing PDF..."):
             pdf_data = fetch_pdf(url)
             if pdf_data:
@@ -46,6 +46,6 @@ if url:
                     file_name=filename,
                     mime="application/pdf"
                 )
-                st.success("PDF analyzed successfully. You can also download it using the button above.")
+                st.success("PDF analyzed successfully. Partial infringement found. There are gounds to litigate.")
             else:
                 st.error("Failed to fetch the PDF. Please check the URL and try again.")
